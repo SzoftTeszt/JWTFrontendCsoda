@@ -1,0 +1,27 @@
+<div class="card" style="width: 18rem;">
+  
+  <div class="card-body">
+    <h5 class="card-title">Registration</h5>
+    <button (click)="registration()" type="button" class="btn btn-primary">Regisztráció</button>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  
+  <div class="card-body">
+    <h5 class="card-title">Login</h5>
+    <button (click)="login()" type="button" class="btn btn-primary">Login</button>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  
+  <div class="card-body">
+    <h5 class="card-title">Companies</h5>
+    <button (click)="getCompanies()" type="button" class="btn btn-primary">Cégek lekérése</button>
+    {{companies|json}}
+    <div class="form-floating mb-3">
+        <input [(ngModel)]="newCompany" type="text" class="form-control" id="newCompany">
+        <label for="newCompany">New Company</label>
+      </div>
+    <button (click)="addCompany()" type="button" class="btn btn-primary">Cégfelvétele</button>
+  </div>
+</div>
