@@ -1,0 +1,12 @@
+{{newUser|json}}
+<div class="card" style="width: 18rem;">
+  
+    <div class="card-body">       
+        <div *ngFor="let oszlop of oszlopok" class="form-floating mb-3">
+            <input [(ngModel)]="newUser[oszlop.key]" [type]="oszlop.type" class="form-control" [id]="oszlop.key" [placeholder]="oszlop.key">
+            <label [for]="oszlop.key">{{oszlop.text}}</label>
+        </div> 
+      <h5 class="card-title">Registration</h5>
+      <button (click)="registration()" type="button" class="btn btn-primary">Regisztráció</button>
+    </div>
+  </div>
