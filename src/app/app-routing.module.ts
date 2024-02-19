@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MindenfeleComponent } from './mindenfele/mindenfele.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
   {path:"", component:MindenfeleComponent},
   {path:"signup", component:SignupComponent},
+  {path:"signin", component:SigninComponent},
   {path:"minden", component:MindenfeleComponent},
 
   {path:"userlist", component:UserListComponent},

@@ -20,14 +20,6 @@ export class SignupComponent {
   }
 
   registration(){
-    // let body={
-    //   username:"Admin",
-    //   firstname:"Admin",
-    //   lastName:"Admin",
-    //   email:"admin@ceg.hu",
-    //   password:"AlmafA12;"
-    // }
     this.auth.register(this.newUser)
-
   }
 }

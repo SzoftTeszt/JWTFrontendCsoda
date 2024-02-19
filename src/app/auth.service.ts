@@ -44,6 +44,7 @@ export class AuthService {
     )
   }
   register(user:any){
+    console.log("user", user)
     this.http.post(this.url+this.authUrl+"register",user,{responseType:'text'}).subscribe(
       {
         next:(res)=>console.log("Reg ok"),
