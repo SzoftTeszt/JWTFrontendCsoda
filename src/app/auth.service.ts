@@ -108,7 +108,7 @@ export class AuthService {
       'responseType':'text'
     }
 
-    return this.http.post(this.url+'update',user, headers)
+    return this.http.post(this.url+'Authentication/update',user, headers)
 
   }
 }
