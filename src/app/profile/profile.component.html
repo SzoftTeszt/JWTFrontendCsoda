@@ -1,1 +1,12 @@
-<p>profile works!</p>
+{{updateUser|json}}
+<div class="card" style="width: 18rem;">
+    <h5 class="card-title">Update User</h5>
+    <div class="card-body">       
+        <div *ngFor="let oszlop of oszlopok" class="form-floating mb-3">
+            <input [(ngModel)]="updateUser[oszlop.key]" [type]="oszlop.type" class="form-control" [id]="oszlop.key" [placeholder]="oszlop.key">
+            <label [for]="oszlop.key">{{oszlop.text}}</label>
+        </div> 
+      
+      <button (click)="update()" type="button" class="btn btn-primary">Update</button>
+    </div>
+  </div>

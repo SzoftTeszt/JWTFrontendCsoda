@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,22 @@ export class AuthService {
   compUrl="Companies/"
   authUrl="Authentication/"
   userUrl="userlist/"
-  token:any
+  private token:any
+  user:any={}
+  private userSub=new BehaviorSubject(null);
+  private SadminSub=new Subject();
+
   constructor(private http:HttpClient) { }
   
+  getSadmin(){
+    return this.SadminSub
+  }
+
+  getUser(){
+    return this.userSub
+  }
+
+
   getCompanies(){
     let headers= new HttpHeaders().set('Authorization','Bearer '+this.token)
     console.log("Headers:",headers)
@@ -59,12 +73,42 @@ export class AuthService {
       next:(res:any)=>
       {
         console.log("Login OK:", res.token)
+        console.log("Login OK:", res.user)
         this.token=res.token
-        
+        this.user=res.user
+        this.user.token=this.token
+        console.log("User: ",this.user)
+        this.getUserClaims(this.user.id).subscribe(
+          (claims)=>{ 
+            this.user.claims=claims
+            this.userSub.next(this.user)
+            // console.log("sadmin", this.user.claims.includes['SAdmin'])
+            console.log("sadmin", this.user.claims.includes('SAdmin'))
+            this.SadminSub.next(this.user.claims.includes('SAdmin'))
+          }
+        )
+
       },
       error:(res)=>console.log("Login Error :(", res)
       }
     )
+
+  }
+  logout(){
+    this.user={}
+    this.userSub.next(null)
+    this.SadminSub.next(false)
+  }
+
+  updateUser(user:any){
+
+    const headers:any={
+      headers: 
+      new HttpHeaders({'Authorization':'Bearer '+this.token}),
+      'responseType':'text'
+    }
+
+    return this.http.post(this.url+'update',user, headers)
 
   }
 }
